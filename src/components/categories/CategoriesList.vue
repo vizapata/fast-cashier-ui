@@ -1,7 +1,7 @@
 <template>
   <div class="categories-list">
     <CategoryItem
-      v-for="category in DEFAULT_CATEGORIES"
+      v-for="category in appConfigStore.categories"
       :key="category.id"
       :category="category"
       icon-only
@@ -10,8 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import { DEFAULT_CATEGORIES } from '@/domain/config'
 import CategoryItem from '@/components/categories/CategoryItem.vue'
+import { useAppConfigStore } from '@/stores/config'
+const appConfigStore = useAppConfigStore()
 </script>
 
 <style lang="scss" scoped>

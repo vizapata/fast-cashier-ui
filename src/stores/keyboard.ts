@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
-import { ALLOWED_ACTIONS, DEFAULT_CATEGORIES, DEFAULT_CATEGORY, KEY_TYPES } from '@/domain/config'
+import { ALLOWED_ACTIONS, KEY_TYPES } from '@/domain/config'
 import type { KeyMetadata } from '@/domain/key-metadata'
 import { Calculator } from '@/domain/calculator'
 import { useCartStore } from './cart'
+import { useAppConfigStore } from './config'
 
 export const keyboardStore = defineStore('keyboardStore', {
   state: () => ({
@@ -30,9 +31,8 @@ export const keyboardStore = defineStore('keyboardStore', {
           this.stack.keyPressed(key.value)
           if (ALLOWED_ACTIONS.ENTER == key.value && this.category && this.value > 0) {
             const cartStore = useCartStore()
-            const category =
-              DEFAULT_CATEGORIES.find((category) => category.id === this.category.value) ??
-              DEFAULT_CATEGORY
+            const appConfigStore = useAppConfigStore()
+            const category = appConfigStore.getOrDefault(this.category.value)
             cartStore.addProduct({ category, value: this.value })
             this.stack.keyPressed(ALLOWED_ACTIONS.DELETE)
           }

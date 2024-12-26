@@ -1,6 +1,6 @@
 <template>
   <div :class="`category-display-item ${iconOnly ? '' : 'with-text'}`" @click="dispatchKeyEvent">
-    <img :src="`/img/${category.icon}`" :class="`${size}`" :alt="category.name" />
+    <img :src="`${iconURL}`" :class="`${size}`" :alt="category.name" />
     <div v-if="!iconOnly" class="category-display-label">
       {{ category.name }}
     </div>
@@ -13,10 +13,12 @@ import { KEY_TYPES } from '@/domain/config'
 import { useKeyboardStore } from '@/stores/keyboard'
 import { computed, onBeforeMount, onMounted, type Ref } from 'vue'
 import type { KeyMetadata } from '@/domain/key-metadata'
+import { useAppConfigStore } from '@/stores/config'
 
-const props = defineProps<{ category: Category; iconOnly: boolean, size?: string }>()
+const props = defineProps<{ category: Category; iconOnly: boolean; size?: string }>()
 
 const keyboardStore = useKeyboardStore()
+const appConfigStore = useAppConfigStore()
 const hasShortcut: Ref<boolean> = computed(() =>
   props.category && props.category.shortcut ? true : false
 )
@@ -26,6 +28,7 @@ const key: Ref<KeyMetadata> = computed(() => ({
   display: props.category.icon,
   type: KEY_TYPES.CATEGORY
 }))
+const iconURL: Ref<string> = computed(() => appConfigStore.assetsBaseUrl + props.category.icon)
 
 const dispatchKeyEvent = () => {
   if (hasShortcut.value) keyboardStore.emitKey(props.category.shortcut)
@@ -54,7 +57,7 @@ onBeforeMount(() => {
     display: grid;
     grid-template-columns: 50px 1fr;
     align-items: center;
-    gap: 10px
+    gap: 10px;
   }
 
   img {
@@ -69,6 +72,5 @@ onBeforeMount(() => {
       filter: sepia(0.3);
     }
   }
-
 }
 </style>

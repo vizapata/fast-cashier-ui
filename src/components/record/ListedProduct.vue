@@ -6,11 +6,10 @@
 </template>
 
 <script setup lang="ts">
-import type { ListedProduct } from '@/domain/listed-product';
-import CategoryItem from '../categories/CategoryItem.vue';
-import { formatCurrency } from '@/utils/currency';
-import { computed, type Ref } from 'vue';
-
+import type { ListedProduct } from '@/domain/listed-product'
+import CategoryItem from '../categories/CategoryItem.vue'
+import { formatCurrency } from '@/utils/currency'
+import { computed, type Ref } from 'vue'
 
 const props = defineProps<{ product: ListedProduct }>()
 const formattedDisplay: Ref<string> = computed(() => formatCurrency(props.product.value))

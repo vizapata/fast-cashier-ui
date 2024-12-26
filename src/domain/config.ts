@@ -1,5 +1,3 @@
-import type { Category } from './category'
-
 export interface Symbol {
   name: string
   symbol: string
@@ -35,31 +33,3 @@ export const ALLOWED_ACTIONS = {
   HUNDRED: '00',
   THOUSAND: '000'
 }
-
-export const DEFAULT_CATEGORY: Category = {
-  name: 'Quesos',
-  id: 'QUESO',
-  icon: 'cheese.png',
-  shortcut: 'Q'
-}
-
-export const DEFAULT_CATEGORIES = [
-  {
-    name: 'Quesos',
-    id: 'QUESO',
-    icon: 'cheese.png',
-    shortcut: 'Q'
-  },
-  {
-    name: 'Yogur',
-    id: 'YOGUR',
-    icon: 'yogur.png',
-    shortcut: 'Y'
-  },
-  {
-    name: 'Torta',
-    id: 'TORTA',
-    icon: 'cake.png',
-    shortcut: 'T'
-  }
-]

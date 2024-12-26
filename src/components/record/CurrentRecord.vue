@@ -9,14 +9,12 @@
 import { useKeyboardStore } from '@/stores/keyboard'
 import { computed, type Ref } from 'vue'
 import CategoryItem from '../categories/CategoryItem.vue'
-import { DEFAULT_CATEGORIES, DEFAULT_CATEGORY } from '@/domain/config'
-import { formatCurrency } from '@/utils/currency';
+import { formatCurrency } from '@/utils/currency'
+import { useAppConfigStore } from '@/stores/config'
 
 const keyboardStore = useKeyboardStore()
-const category = computed(
-  () =>
-    DEFAULT_CATEGORIES.find((cat) => cat.id === keyboardStore.category.value) ?? DEFAULT_CATEGORY
-)
+const appConfigStore = useAppConfigStore()
+const category = computed(() => appConfigStore.getOrDefault(keyboardStore.category.value))
 const formattedDisplay: Ref<string> = computed(() => formatCurrency(keyboardStore.value))
 </script>
 

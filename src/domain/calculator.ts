@@ -1,6 +1,7 @@
 import { ALLOWED_ACTIONS, ALLOWED_OPERATORS } from '@/domain/config'
 import type { KeyValue } from '@/domain/key-metadata'
 import { NotEmptyStack } from '@/domain/stack'
+import { loggerService } from '@/service/logger.service'
 
 const DEFAULT_STACK_VALUE = 0
 const isOperator = (operator: KeyValue): boolean => ALLOWED_OPERATORS.some((_) => _ === operator)
@@ -28,7 +29,7 @@ export class Calculator {
     } else if (isDigit(key)) {
       this.digitPressed(key as number)
     } else {
-      console.warn('Key not recognized by calculator')
+      loggerService.warn('Key not recognized by calculator')
     }
   }
 
