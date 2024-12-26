@@ -13,7 +13,7 @@
         <RecordList />
       </div>
       <div class="total-info-component">
-        <div>Total: </div>
+        <div>Total:</div>
         <div class="current-input">{{ formattedTotal }}</div>
       </div>
     </div>
@@ -54,7 +54,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
 
-  >div {
+  > div {
     padding: 10px;
     border: solid red 1px;
   }
@@ -81,7 +81,7 @@ onBeforeUnmount(() => {
       grid-column-start: 3;
     }
 
-    >div {
+    > div {
       padding: 10px;
       border: solid red 1px;
     }
